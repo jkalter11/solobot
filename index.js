@@ -1,8 +1,8 @@
 const config = require("./config.json");
 const Discord = require("discord.js");
 const Solo = new Discord.Client({disableEveryone: true});
-const GoogleImages = require('google-images');
-const searchClient = new GoogleImages('001297346813276896387:lubuqwrcgss', 'AIzaSyB7cPhacMIUD2AMxQrzgBLY9q0kWngGF0Q');
+
+
 
 Solo.on("ready", async () => { //Solo "playing..."
   console.log("Solo is online!");
