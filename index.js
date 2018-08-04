@@ -248,4 +248,4 @@ Solo.on("message", async message => {
 
 });
 
-Solo.login("NDcxNDE0NjY1MzA2NzAxODQ0.DkdL1Q.2fiFGstFcThWiUyad-fE_Wdg_RI");
+Solo.login(process.env.TOKEN);
