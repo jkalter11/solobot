@@ -12,6 +12,7 @@ Solo.on("ready", async () => { //Solo "playing..."
 Solo.on("message", async message => {
   if(message.author.Solo) return;
   if(message.channel.type === "dm") return;
+  if(message.channel.name == "solo-nightly-testing") return;
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
