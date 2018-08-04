@@ -248,4 +248,4 @@ Solo.on("message", async message => {
 
 });
 
-Solo.login(config.token);
+Solo.login(ProcessingInstruction.env.BOT_TOKEN);
