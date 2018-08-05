@@ -102,7 +102,8 @@ Solo.on("message", async message => {
     .addField("Your Pickle size is", "~" + pickle + "." + pickleFloat + "cm");
     if(message.member.roles.find("name", "King of Lewd") || message.member.roles.find("name", "Vice King of Lewd")){
 // TODO: Fix
-      let pickletwo = 38;
+      let pickletwo = getRandomInt(36, 40);
+      let pickleFloatTwo = getRandomInt(9);
       let embedtwo = new Discord.RichEmbed()
       .setTitle("Solobot - Pickle")
       .setAuthor(Solo.user.username, Solo.user.avatarURL)
@@ -112,7 +113,7 @@ Solo.on("message", async message => {
 
       .setTimestamp()
 
-      .addField("Your Pickle size is", "~" + pickletwo + "cm");
+      .addField("Your Pickle size is", "~" + pickletwo + "." + pickleFloatTwo + "cm");
       return message.channel.send(embedtwo);
     } else {
       return message.channel.send(embed);
