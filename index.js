@@ -89,7 +89,7 @@ Solo.on("message", async message => {
     }
 
     let pickle = getRandomInt(35);
-    let pickleFlot = getRandomInt(9);
+    let pickleFloat = getRandomInt(9);
     let embed = new Discord.RichEmbed()
     .setTitle("Solobot - Pickle")
     .setAuthor(Solo.user.username, Solo.user.avatarURL)
