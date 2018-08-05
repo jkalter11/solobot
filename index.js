@@ -88,7 +88,7 @@ Solo.on("message", async message => {
     return Math.floor(Math.random() * Math.floor(max));
     }
 
-    let pickle = getRandomInt(35);
+    let pickle = getRandomInt(37);
     let pickleFloat = getRandomInt(9);
     let embed = new Discord.RichEmbed()
     .setTitle("Solobot - Pickle")
