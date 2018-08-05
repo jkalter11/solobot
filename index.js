@@ -102,7 +102,7 @@ Solo.on("message", async message => {
     .addField("Your Pickle size is", "~" + pickle + "." + pickleFloat + "cm");
     if(message.member.roles.find("name", "King of Lewd") || message.member.roles.find("name", "Vice King of Lewd")){
 // TODO: Fix
-      let pickletwo = getRandomInt(36, 40);
+      let pickletwo = 39;
       let pickleFloatTwo = getRandomInt(9);
       let embedtwo = new Discord.RichEmbed()
       .setTitle("Solobot - Pickle")
