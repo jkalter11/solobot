@@ -100,7 +100,7 @@ Solo.on("message", async message => {
     .setTimestamp()
 
     .addField("Your Pickle size is", "~" + pickle + "." + pickleFloat + "cm");
-    if(message.member.roles.find("name", "King of Lewd") || message.member.roles.find("name", "Vice King of Lewd")){
+    if(message.member.roles.find("name", config.adminRoles)){
 // TODO: Fix
       let pickletwo = 39;
       let pickleFloatTwo = getRandomInt(9);
