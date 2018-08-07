@@ -4,5 +4,6 @@
   "embedWarning": "#ffcc00",
   "embedFailure": "#dd0000",
   "embedInformation": "#4c88ff",
-  "adminRoles": "King and Queen"
+  "adminRoles": "King and Queen",
+  "modRoles": "MiniMod"
 }
