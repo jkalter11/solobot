@@ -47,15 +47,14 @@ Solo.on("message", async message => {
         .setDescription("You are looking at Solobots' Helppage.")
         .setColor(config.embedInformation)
 
-        .addField("Information", "**>help** - Returns this Helppage \n **>server** - Displays some Information about this Guild")
-        .addField("Moderation", "**>report [@user] [reason]** - Reports a User.")
-        .addField("Fun", "**>pickle** - WIP, tells you your pickle size")
-        .addField("Admincommands", "**>state [PLAYING|STREAMING|LISTENING|WATCHING] [Activity, max. 5 Words]** - Changes the displayed activity of the bot.")
+        .addField("Information", "**>help** :exclamation: - Returns this Helppage \n **>server** :globe_with_meridians: - Displays some Information about this Guild")
+        .addField("Moderation", "**>report [@user] [reason]** :mega: - Reports a User.")
+        .addField("Fun", "**>pickle** :no_mouth: - WIP, tells you your pickle size")
+        .addField("Admincommands", "**>state [PLAYING|STREAMING|LISTENING|WATCHING] [Activity, max. 5 Words]** :speech_left: - Changes the displayed activity of the bot.")
         .setFooter("© iamflee_")
         .setTimestamp()
       return message.channel.send(embed);
   }
-
   if(cmd === config.prefix + "server") {
     let serverIcon = message.guild.iconURL;
     let embed = new Discord.RichEmbed()
