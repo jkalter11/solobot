@@ -43,7 +43,7 @@ Solo.on("message", async message => {
         .addField("Information", "**>help** :exclamation: - Returns this Helppage \n **>server** :globe_with_meridians: - Displays some Information about this Guild")
         .addField("Moderation", "**>report [@user] [reason]** :mega: - Reports a User.")
         .addField("Fun", "**>pickle** :no_mouth: - WIP, tells you your pickle size")
-        .addField("Admincommands", "**>state [PLAYING|STREAMING|LISTENING|WATCHING] [Activity, max. 5 Words]** :speech_left: - Changes the displayed activity of the bot.")
+        .addField("Admincommands", "**>state [playing|streaming|listening|watching] [Activity, min. 2 letters]** :speech_left: - Changes the displayed activity of the bot.")
         .setFooter("© iamflee_")
         .setTimestamp()
       return message.channel.send(embed);
@@ -204,7 +204,7 @@ Solo.on("message", async message => {
           .setThumbnail("https://i.imgur.com/ycwGUG3.png")
           //^ Info-Icon blue, 128px
           // TODO: Remove)
-          .addField("Success", "Success! The Bot state will be updated this could take a Minute or two.");
+          .addField("Success", "Success! The Bot state will be updated.");
 
           return message.channel.send(sSuccess);
         } else {
