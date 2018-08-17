@@ -12,7 +12,7 @@ Solo.on("ready", async () => { //Solo "playing..."
 Solo.on("message", async message => {
   if(message.author.Solo) return;
   if(message.channel.type === "dm") return;
-  if(message.channel.name == "solo-nightly-testing") return;
+  //if(message.channel.name != "solo-nightly-testing") return;
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
@@ -26,14 +26,7 @@ Solo.on("message", async message => {
 
   .addField("Error", "You do not have the right permissions to perform this Action.");
 
-  //"!flee => Fokz!"-Blocker
-  if(message.content == "Fokz!") {
-    return message.channel.send({embed: {
-      color: config.embedColor,
-      title: "Fuck you Dan",
-      description: "no u"
-}});
-  }
+  
 
 
   //HELP-Command
@@ -55,6 +48,7 @@ Solo.on("message", async message => {
         .setTimestamp()
       return message.channel.send(embed);
   }
+
   if(cmd === config.prefix + "server") {
     let serverIcon = message.guild.iconURL;
     let embed = new Discord.RichEmbed()
@@ -120,25 +114,6 @@ Solo.on("message", async message => {
 
   }
 
-  //Neko-CMD Department
-  //tags neko, shifty
-/*
-  if(cmd === config.prefix + "neko") {
-    if(args === null || args.length == 0) {
-      let embed = new Discord.RichEmbed()
-      .setTitle("Solobot - Neko")
-      .setAuthor(Solo.user.username, Solo.user.avatarURL)
-      .setColor(config.embedWarning)
-
-      .setTimestamp()
-
-      .addField("Help", "Usage: >neko [male|female] (lewd). Square brackets indicate mandatory arguments.");
-      return message.channel.send(embed);
-    } else if(args == "male") {an
-      return message.channel.send(searchClient.search("Male Neko"));
-    }
-  }*/
-
   if(cmd === config.prefix + "report") {
     let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!rUser) {
@@ -165,10 +140,31 @@ Solo.on("message", async message => {
     return message.channel.send(rEmbed);
   }
 
+
+
   if(cmd === config.prefix + "state") {
-    let states = ["WATCHING", "STREAMING", "LISTENING", "PLAYING"];
-    let stateActivity;
+    let states = ["watching", "streaming", "listening", "playing"];
+    var stateActivity = String(args.slice(1).join(" "));
+    let typeActivity;
+    switch(args[0]) {
+      case "watching":
+        typeActivity = "WATCHING";
+        break;
+      case "streaming":
+        typeActivity = "STREAMING";
+        break;
+      case "listening":
+        typeActivity = "LISTENING";
+        break;
+      case "playing":
+        typeActivity = "PLAYING";
+        break;
+    }
+
     let rEmbed = new Discord.RichEmbed()
+
+    
+
     .setTitle("Solobot - Error")
     .setAuthor(Solo.user.username, Solo.user.avatarURL)
     .setColor(config.embedFailure)
@@ -176,7 +172,7 @@ Solo.on("message", async message => {
     .setThumbnail("https://i.imgur.com/3m6n5Lk.png")
     //^ Exclamation Mark surrounded by triangle, 128px
     // TODO: Remove)
-    .addField("Error", "Please only use WATCHING, STREAMING, LISTENING or PLAYING for the first argument.");
+    .addField("Error", "Please only use `watching`, `streaming`, `listening` or `playing` for the first argument.");
     if (states.indexOf(args[0]) > -1) {
       if(stateActivity.length <= 1) {
         let rEmbedd = new Discord.RichEmbed()
@@ -191,36 +187,14 @@ Solo.on("message", async message => {
 
         return message.channel.send(rEmbedd);
       } else {
-        if(message.member.roles.find("name", config.adminRoles[0]) || message.member.roles.find("name", config.adminRoles[1])){
+        if(message.member.roles.find("name", config.adminRoles)){
 
-          let finalACS = 0;
-          let argLength = args.length;
-          for(let finalACS = 0; finalACS < argLength; finalACS++) {
-            console.log("Solo - State-Command: There are " + finalACS + " args given.");
-          }
-          if(finalACS == 1) {
-            stateActivity = args[1];
-          } else if(finalACS == 2) {
-            stateActivity = args[1] + " " + args[2];
-          } else if(finalACS == 3) {
-            stateActivity = args[1] + " " + args[2] + " " + args[3];
-          } else if(finalACS == 4) {
-            stateActivity = args[1] + " " + args[2] + " " + args[3] + " " + args[4];
-          } else if(finalACS == 5) {
-            stateActivity = args[1] + " " + args[2] + " " + args[3] + " " + args[4] + " " + args[5];
-          }
-          Solo.user.setActivity(stateActivity, {type: args[0]});
+          
+          
+          
+          Solo.user.setActivity(stateActivity, {type: typeActivity});
 
 
-          let sSuccessInfo = new Discord.RichEmbed()
-          .setTitle("Solobot - State")
-          .setAuthor(Solo.user.username, Solo.user.avatarURL)
-          .setColor(config.embedWarning)
-          .setTimestamp()
-          .setThumbnail("https://i.imgur.com/ADRsqLY.png")
-          //^ Info-Icon blue, 128px
-
-          .addField("Information", "Updating the State could take a Minute.");
 
           let sSuccess = new Discord.RichEmbed()
           .setTitle("Solobot - State")
@@ -230,10 +204,9 @@ Solo.on("message", async message => {
           .setThumbnail("https://i.imgur.com/ycwGUG3.png")
           //^ Info-Icon blue, 128px
           // TODO: Remove)
-          .addField("Success", "Success! The Bot state will be updated.");
+          .addField("Success", "Success! The Bot state will be updated this could take a Minute or two.");
 
-          message.channel.send(sSuccess);
-          return message.channel.send(sSuccessInfo);
+          return message.channel.send(sSuccess);
         } else {
           return message.channel.send(embedNoPerms);
         }
