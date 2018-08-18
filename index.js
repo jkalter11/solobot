@@ -254,6 +254,15 @@ if(cmd === config.prefix + "kick") {
 
   return;
 }
+  
+  if(cmd === config.prefix + "update") {
+  let soloOwner = process.env.OWNER;
+  if(message.author == soloOwner) {
+    message.channel.send("hey master");
+  }
+  
+  return;
+}
 
 });
 
