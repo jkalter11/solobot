@@ -5,7 +5,7 @@ const Solo = new Discord.Client({disableEveryone: true});
 
 
 Solo.on("ready", async () => { //Solo "playing..."
-  console.log("Solo is online!");
+  console.log("'Solo.' has loaded successfully.");
   Solo.user.setActivity("over the Server", {type: "WATCHING"});
 });
 
@@ -43,7 +43,7 @@ Solo.on("message", async message => {
         .addField("Information", "**>help** :exclamation: - Returns this Helppage \n **>server** :globe_with_meridians: - Displays some Information about this Guild")
         .addField("Moderation", "**>report [@user] [reason]** :mega: - Reports a User.")
         .addField("Fun", "**>pickle** :no_mouth: - WIP, tells you your pickle size")
-        .addField("Admincommands", "**>state [playing|streaming|listening|watching] [Activity, min. 2 letters]** :speech_left: - Changes the displayed activity of the bot.")
+        .addField("Admincommands", "**>state [PLAYING|STREAMING|LISTENING|WATCHING] [Activity, max. 5 Words]** :speech_left: - Changes the displayed activity of the bot.")
         .setFooter("© iamflee_")
         .setTimestamp()
       return message.channel.send(embed);
@@ -93,7 +93,7 @@ Solo.on("message", async message => {
     .setTimestamp()
 
     .addField("Your Pickle size is", "~" + pickle + "." + pickleFloat + "cm");
-    if(message.member.roles.find("name", config.adminRoles) || message.member.roles.find("name", config.modRoles)){
+    if(message.member == message.guild.owner || message.member.hasPermission("ADMINISTRATOR")){
 // TODO: Fix
       let pickletwo = 39;
       let pickleFloatTwo = getRandomInt(9);
@@ -204,7 +204,7 @@ Solo.on("message", async message => {
           .setThumbnail("https://i.imgur.com/ycwGUG3.png")
           //^ Info-Icon blue, 128px
           // TODO: Remove)
-          .addField("Success", "Success! The Bot state will be updated.");
+          .addField("Success", "Success! The Bot state will be updated this could take a Minute or two.");
 
           return message.channel.send(sSuccess);
         } else {
@@ -218,7 +218,42 @@ Solo.on("message", async message => {
   }
 
 
+if(cmd === config.prefix + "kick") {
+  let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+  if(!kUser) {
+    let rEmbedd = new Discord.RichEmbed()
+        .setTitle("Solobot - Error")
+        .setAuthor(Solo.user.username, Solo.user.avatarURL)
+        .setColor(config.embedFailure)
+        .setTimestamp()
+        .setThumbnail("https://i.imgur.com/3m6n5Lk.png")
+        .addField("Error", "You didn't specify which user to kick.");
 
+        return message.channel.send(rEmbedd);
+  }
+  let kReason = args.slice(1).join(" ");
+  if(!kReason) {
+    kReason = "Unspecified reason.";
+  }
+
+  if(message.member != message.guild.owner) {
+    if(!message.member.hasPermission("KICK_MEMBERS")) return;
+    if(kUser.hasPermission("KICK_MEMBERS") && !message.member.hasPermission("ADMINISTRATOR")) return;
+    if(kUser.hasPermission("ADMINISTRATOR")) return;
+  }
+  
+  message.guild.member(kUser).kick(kReason);
+  let kMessage = new Discord.RichEmbed()
+        .setTitle("Solobot - Kick")
+        .setAuthor(Solo.user.username, Solo.user.avatarURL)
+        .setColor(config.embedSuccess)
+        .setTimestamp()
+        .addField("Success", "Successfully kicked " + kUser + " for " + kReason);
+
+        message.channel.send(kMessage);
+
+  return;
+}
 
 });
 
