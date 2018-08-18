@@ -204,7 +204,7 @@ Solo.on("message", async message => {
           .setThumbnail("https://i.imgur.com/ycwGUG3.png")
           //^ Info-Icon blue, 128px
           // TODO: Remove)
-          .addField("Success", "Success! The Bot state will be updated this could take a Minute or two.");
+          .addField("Success", "Success! The Bot state will be updated.");
 
           return message.channel.send(sSuccess);
         } else {
